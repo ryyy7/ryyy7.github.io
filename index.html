@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title id="pageTitle">ryyy | 个人主页</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <script>
+    // Tailwind 配置
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            neon: {
+              blue: '#00f3ff',
+              purple: '#9d00ff',
+              pink: '#ff00c8',
+            },
+            dark: {
+              900: '#0a0a10',
+              800: '#121218',
+              700: '#1a1a24',
+              600: '#242430',
+            }
+          },
+          fontFamily: {
+            code: ['Consolas', 'Monaco', 'Courier New', 'monospace'],
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+          },
+          animation: {
+            'glow': 'glow 2s ease-in-out infinite alternate',
+            'float': 'float 6s ease-in-out infinite',
+            'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+          },
+          keyframes: {
+            glow: {
+              '0%': { textShadow: '0 0 5px #fff, 0 0 10px #fff, 0 0 15px #00f3ff, 0 0 20px #00f3ff' },
+              '100%': { textShadow: '0 0 10px #fff, 0 0 20px #fff, 0 0 30px #9d00ff, 0 0 40px #9d00ff' },
+            },
+            float: {
+              '0%, 100%': { transform: 'translateY(0)' },
+              '50%': { transform: 'translateY(-10px)' },
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style type="text/tailwindcss">
+    @layer utilities {
+      .text-shadow-neon {
+        text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #00f3ff, 0 0 20px #00f3ff, 0 0 25px #00f3ff;
+      }
+      .bg-gradient-neon {
+        background: linear-gradient(135deg, #0a0a10 0%, #1a1a24 50%, #242430 100%);
+      }
+      .border-glow {
+        box-shadow: 0 0 5px #00f3ff, 0 0 10px #00f3ff, 0 0 15px #9d00ff;
+      }
+      .scrollbar-hide::-webkit-scrollbar {
+        display: none;
+      }
+      .scrollbar-hide {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+    }
+  </style>
+</head>
+<body class="bg-dark-900 text-white font-sans min-h-screen overflow-x-hidden">
+  <!-- 背景装饰 -->
+  <div class="fixed inset-0 z-0 opacity-20 pointer-events-none">
+    <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-neon-blue rounded-full blur-[100px]"></div>
+    <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-neon-purple rounded-full blur-[100px]"></div>
+  </div>
+
+  <!-- 导航栏 -->
+  <nav class="sticky top-0 z-50 bg-dark-800/80 backdrop-blur-md border-b border-neon-blue/20">
+    <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+      <div class="text-xl font-bold text-neon-blue animate-glow" id="navName">ryyy</div>
+      <div class="hidden md:flex space-x-8">
+        <a href="#about" class="hover:text-neon-blue transition-colors duration-300">关于我</a>
+        <a href="#skills" class="hover:text-neon-blue transition-colors duration-300">技能</a>
+        <a href="#projects" class="hover:text-neon-blue transition-colors duration-300">项目</a>
+        <a href="#contact" class="hover:text-neon-blue transition-colors duration-300">联系我</a>
+      </div>
+      <button class="md:hidden text-2xl" id="mobileMenuBtn">
+        <i class="fa fa-bars"></i>
+      </button>
+    </div>
+    <!-- 移动端菜单 -->
+    <div class="md:hidden hidden bg-dark-800/95 backdrop-blur-md absolute w-full border-b border-neon-blue/20" id="mobileMenu">
+      <div class="container mx-auto px-4 py-2 flex flex-col space-y-4">
+        <a href="#about" class="py-2 hover:text-neon-blue transition-colors duration-300">关于我</a>
+        <a href="#skills" class="py-2 hover:text-neon-blue transition-colors duration-300">技能</a>
+        <a href="#projects" class="py-2 hover:text-neon-blue transition-colors duration-300">项目</a>
+        <a href="#contact" class="py-2 hover:text-neon-blue transition-colors duration-300">联系我</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- 英雄区 -->
+  <header class="relative z-10 container mx-auto px-4 py-20 md:py-32 flex flex-col items-center justify-center text-center">
+    <div class="animate-float mb-6">
+      <div class="w-32 h-32 md:w-48 md:h-48 rounded-full bg-dark-700 border-2 border-neon-blue border-glow flex items-center justify-center overflow-hidden">
+        <span class="text-5xl md:text-7xl font-code text-neon-blue">r</span>
+      </div>
+    </div>
+    <h1 class="text-4xl md:text-6xl font-bold mb-4" id="heroTitle">
+      <span class="text-white">Hi, I'm </span>
+      <span class="text-neon-blue animate-glow" id="heroName">ryyy</span>
+    </h1>
+    <p class="text-xl md:text-2xl text-gray-300 mb-8 max-w-2xl" id="heroSubtitle">软件工程专业学生</p>
+    <p class="text-gray-400 max-w-2xl mb-10" id="heroDesc">热爱编程、算法和软件工程，持续学习前沿技术，致力于打造高效、优雅的软件解决方案。</p>
+    <div class="flex flex-wrap justify-center gap-4">
+      <a href="#projects" class="px-8 py-3 bg-neon-blue/10 text-neon-blue border border-neon-blue rounded-lg hover:bg-neon-blue/20 transition-all duration-300 border-glow">
+        <i class="fa fa-code mr-2"></i>查看我的项目
+      </a>
+      <a href="#contact" class="px-8 py-3 bg-transparent text-white border border-white/30 rounded-lg hover:border-white/60 transition-all duration-300">
+        <i class="fa fa-envelope mr-2"></i>联系我
+      </a>
+    </div>
+  </header>
+
+  <main class="relative z-10 container mx-auto px-4 pb-20">
+    <!-- 关于我 -->
+    <section id="about" class="py-16">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center">
+          <span class="relative inline-block">
+            关于我
+            <span class="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-neon-blue to-neon-purple"></span>
+          </span>
+        </h2>
+        <div class="bg-dark-800/50 backdrop-blur-sm rounded-2xl p-8 border border-dark-700 hover:border-neon-blue/30 transition-all duration-500 shadow-lg">
+          <p class="text-lg text-gray-300 leading-relaxed mb-6" id="aboutDesc">
+            热爱编程、算法和软件工程，持续学习前沿技术，致力于打造高效、优雅的软件解决方案。
+          </p>
+          <div class="flex flex-wrap gap-4 pt-4">
+            <div class="flex items-center bg-dark-700/80 px-4 py-2 rounded-lg">
+              <i class="fa fa-graduation-cap text-neon-blue mr-3"></i>
+              <span>软件工程专业</span>
+            </div>
+            <div class="flex items-center bg-dark-700/80 px-4 py-2 rounded-lg">
+              <i class="fa fa-code text-neon-purple mr-3"></i>
+              <span>全栈开发爱好者</span>
+            </div>
+            <div class="flex items-center bg-dark-700/80 px-4 py-2 rounded-lg">
+              <i class="fa fa-book text-neon-pink mr-3"></i>
+              <span>持续学习中</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 技能 -->
+    <section id="skills" class="py-16">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center">
+          <span class="relative inline-block">
+            我的技能
+            <span class="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-neon-purple to-neon-pink"></span>
+          </span>
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="skillsGrid">
+          <!-- 技能卡片会通过JS动态生成 -->
+        </div>
+      </div>
+    </section>
+
+    <!-- 项目 -->
+    <section id="projects" class="py-16">
+      <div class="max-w-5xl mx-auto">
+        <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center">
+          <span class="relative inline-block">
+            我的项目
+            <span class="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-neon-pink to-neon-blue"></span>
+          </span>
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="projectsGrid">
+          <!-- 项目卡片会通过JS动态生成 -->
+        </div>
+      </div>
+    </section>
+
+    <!-- 联系我 -->
+    <section id="contact" class="py-16">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center">
+          <span class="relative inline-block">
+            联系我
+            <span class="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-neon-blue to-neon-pink"></span>
+          </span>
+        </h2>
+        <div class="bg-dark-800/50 backdrop-blur-sm rounded-2xl p-8 border border-dark-700 hover:border-neon-purple/30 transition-all duration-500 shadow-lg">
+          <div class="flex flex-col md:flex-row justify-center items-center gap-8" id="contactGrid">
+            <!-- 联系方式会通过JS动态生成 -->
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- 页脚 -->
+  <footer class="relative z-10 bg-dark-800/80 backdrop-blur-md border-t border-neon-blue/20 py-8">
+    <div class="container mx-auto px-4 text-center">
+      <p class="text-gray-400" id="footerText">© 2025 ryyy | 软件工程专业学生 | 持续学习，不断进步</p>
+      <div class="mt-4 flex justify-center space-x-6">
+        <a href="#" class="text-gray-400 hover:text-neon-blue transition-colors duration-300">
+          <i class="fa fa-github text-xl"></i>
+        </a>
+        <a href="#" class="text-gray-400 hover:text-neon-blue transition-colors duration-300">
+          <i class="fa fa-weixin text-xl"></i>
+        </a>
+        <a href="#" class="text-gray-400 hover:text-neon-blue transition-colors duration-300">
+          <i class="fa fa-envelope text-xl"></i>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- 配置文件 -->
+  <script src="config.js"></script>
+  <!-- 主脚本 -->
+  <script>
+    // 页面加载完成后初始化
+    document.addEventListener('DOMContentLoaded', function() {
+      // 1. 更新页面标题和基础信息
+      document.getElementById('pageTitle').textContent = CONFIG.fullName;
+      document.getElementById('navName').textContent = CONFIG.name;
+      document.getElementById('heroName').textContent = CONFIG.name;
+      document.getElementById('heroTitle').innerHTML = `<span class="text-white">Hi, I'm </span><span class="text-neon-blue animate-glow">${CONFIG.name}</span>`;
+      document.getElementById('heroSubtitle').textContent = CONFIG.subtitle;
+      document.getElementById('heroDesc').textContent = CONFIG.description;
+      document.getElementById('aboutDesc').textContent = CONFIG.description;
+      document.getElementById('footerText').textContent = CONFIG.footer;
+
+      // 2. 生成技能卡片
+      const skillsGrid = document.getElementById('skillsGrid');
+      CONFIG.skills.forEach(skill => {
+        const skillCard = document.createElement('div');
+        skillCard.className = 'bg-dark-800/50 rounded-xl p-6 border border-dark-700 hover:border-neon-blue/30 transition-all duration-500';
+        skillCard.innerHTML = `
+          <h3 class="text-xl font-bold text-neon-blue mb-4">${skill.name}</h3>
+          <div class="flex flex-wrap gap-2">
+            ${skill.items.map(item => `
+              <span class="bg-dark-700/80 px-3 py-1 rounded-full text-sm hover:bg-neon-blue/20 transition-colors duration-300">${item}</span>
+            `).join('')}
+          </div>
+        `;
+        skillsGrid.appendChild(skillCard);
+      });
+
+      // 3. 生成项目卡片
+      const projectsGrid = document.getElementById('projectsGrid');
+      CONFIG.projects.forEach(project => {
+        const projectCard = document.createElement('div');
+        projectCard.className = 'bg-dark-800/50 rounded-xl overflow-hidden border border-dark-700 hover:border-neon-purple/30 transition-all duration-500 hover:shadow-lg hover:shadow-neon-purple/10';
+        projectCard.innerHTML = `
+          <div class="h-48 bg-gradient-to-br from-dark-700 to-dark-800 flex items-center justify-center">
+            <i class="fa fa-laptop-code text-6xl text-neon-purple/50"></i>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold mb-2 hover:text-neon-purple transition-colors duration-300">${project.title}</h3>
+            <p class="text-gray-400 mb-4 text-sm">${project.description}</p>
+            <div class="flex flex-wrap gap-2 mb-4">
+              ${project.tags.map(tag => `
+                <span class="bg-dark-700/80 px-2 py-1 rounded text-xs">${tag}</span>
+              `).join('')}
+            </div>
+            <a href="${project.link}" target="_blank" class="text-neon-blue hover:text-neon-pink transition-colors duration-300 flex items-center text-sm">
+              <span>查看源码</span>
+              <i class="fa fa-external-link ml-2"></i>
+            </a>
+          </div>
+        `;
+        projectsGrid.appendChild(projectCard);
+      });
+
+      // 4. 生成联系方式
+      const contactGrid = document.getElementById('contactGrid');
+      const iconMap = {
+        github: 'fa-github',
+        mail: 'fa-envelope',
+        file: 'fa-file-text'
+      };
+      CONFIG.contact.forEach(contact => {
+        const contactItem = document.createElement('a');
+        contactItem.href = contact.url;
+        contactItem.target = contact.url.startsWith('mailto') ? '' : '_blank';
+        contactItem.className = 'flex items-center bg-dark-700/80 px-6 py-4 rounded-lg hover:bg-neon-blue/10 transition-all duration-300 w-full md:w-auto';
+        contactItem.innerHTML = `
+          <i class="fa ${iconMap[contact.icon]} text-neon-blue text-xl mr-4"></i>
+          <span>${contact.name}</span>
+        `;
+        contactGrid.appendChild(contactItem);
+      });
+
+      // 5. 移动端菜单切换
+      const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+      const mobileMenu = document.getElementById('mobileMenu');
+      mobileMenuBtn.addEventListener('click', function() {
+        mobileMenu.classList.toggle('hidden');
+        const icon = mobileMenuBtn.querySelector('i');
+        if (mobileMenu.classList.contains('hidden')) {
+          icon.className = 'fa fa-bars';
+        } else {
+          icon.className = 'fa fa-times';
+        }
+      });
+
+      // 6. 平滑滚动
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+          const targetId = this.getAttribute('href');
+          if (targetId === '#') return;
+          
+          const targetElement = document.querySelector(targetId);
+          if (targetElement) {
+            window.scrollTo({
+              top: targetElement.offsetTop - 80,
+              behavior: 'smooth'
+            });
+            
+            // 关闭移动端菜单
+            if (!mobileMenu.classList.contains('hidden')) {
+              mobileMenu.classList.add('hidden');
+              mobileMenuBtn.querySelector('i').className = 'fa fa-bars';
+            }
+          }
+        });
+      });
+
+      // 7. 滚动时的导航栏效果
+      window.addEventListener('scroll', function() {
+        const nav = document.querySelector('nav');
+        if (window.scrollY > 50) {
+          nav.classList.add('shadow-lg');
+          nav.classList.add('shadow-neon-blue/5');
+        } else {
+          nav.classList.remove('shadow-lg');
+          nav.classList.remove('shadow-neon-blue/5');
+        }
+      });
+    });
+  </script>
+</body>
+</html>
